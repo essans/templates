@@ -1,3 +1,6 @@
 {
-    "directory_name": "new_project"
+    "project_name": "new_project",
+    "author_name":"Essan Soobratty",
+    "description":"What this is about"
 }   
+
