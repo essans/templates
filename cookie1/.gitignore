@@ -1,0 +1,7 @@
+# data files
+data/raw
+data/processed
+
+# model checkpoints
+models/checkpoints
+
