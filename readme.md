@@ -8,6 +8,13 @@ This repo contains multiple Cookiecutter templates.
    - Run it using:
      ```bash
      cookiecutter https://github.com/essans/templates.git --directory cookiecutter1
+     or
+     cookiecutter git@github.com:essans/templates.git --directory cookiecutter1
+     ```
+
+     if testing from a specific branch then:
+     ```
+     cookiecutter git@github.com:essans/templates.git --directory cookiecutter1 -c branchname
      ```
 
      
