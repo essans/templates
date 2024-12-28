@@ -1,0 +1,14 @@
+input_data:
+  raw_dir: "data/raw/"
+  processed_dir: "data/processed/"
+
+outputs:
+  logs_dir: "oututs/logs/"
+  predictions_dir: "outputs/predictions/"
+  visualizations_dir: "outputs/visualizations/"
+  metrics_dir: "outputs/metrics/"
+
+model:
+  model_dir: "models/"
+  checkpoints_dir: "models/checkpoints/"
+

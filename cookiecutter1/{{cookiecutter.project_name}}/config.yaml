@@ -1,8 +1,0 @@
-data:
-  raw_dir: "data/raw/"
-  processed_dir: "data/processed/"
-  sample_dir: "data/sample/"
-
-model:
-  checkpoints_dir: "models/checkpoints/"
-  
