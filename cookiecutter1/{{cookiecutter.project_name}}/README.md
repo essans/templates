@@ -30,6 +30,55 @@ pip install -r requirements.txt
 chmod +x /scripts/*
 ```
 
+### Structure
+
+ROOT
+├── cookiecutter.json
+|
+├── hooks
+│   ├── post_gen_project.py
+│   └── pre_gen_project.py
+|
+└── {{cookiecutter.project_name}}
+    ├── README.md
+    |
+    ├── configs
+    │   └── config.yaml
+    |
+    ├── data
+    │   ├── processed
+    │   ├── processed_sample
+    │   ├── raw
+    │   └── raw_sample
+    |
+    ├── environment.yml
+    |
+    ├── models
+    │   └── checkpoints
+    |
+    ├── notebooks
+    |
+    ├── outputs
+    │   ├── logs
+    │   ├── metrics
+    │   ├── predictions
+    │   └── visualizations
+    |
+    ├── requirements.txt
+    |
+    ├── scripts
+    │   ├── predict.py
+    │   └── train.py
+    |
+    ├── setup.py
+    ├── src
+    │   └── __init__.py
+    |
+    └── tests
+
+20 directories, 11 files
+
+
 
 ### Note to self for potential further enhancements:
 https://github.com/drivendataorg/cookiecutter-data-science/
