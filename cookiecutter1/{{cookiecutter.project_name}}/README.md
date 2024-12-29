@@ -32,6 +32,7 @@ chmod +x /scripts/*
 
 ### Structure
 
+```
 ROOT
 ├── cookiecutter.json
 |
@@ -75,6 +76,7 @@ ROOT
     │   └── __init__.py
     |
     └── tests
+```
 
 20 directories, 11 files
 
