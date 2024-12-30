@@ -5,3 +5,23 @@ data/processed
 # model checkpoints
 models/checkpoints
 
+# Ignore Python virtual environment
+venv/
+
+# Ignore outputs and temporary files
+outputs/
+*.temp
+__pycache__/
+*.log
+
+# Ignore IDE configurations
+.vscode/
+.idea/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
