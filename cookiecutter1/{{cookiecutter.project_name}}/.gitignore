@@ -36,3 +36,7 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+
+#other
+src/__pycache__/*
+
