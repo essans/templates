@@ -11,6 +11,7 @@ models/checkpoints
 
 # Ignore Python virtual environment
 venv/
+.venv/
 
 # Ignore outputs and temporary files
 outputs/logs/*
