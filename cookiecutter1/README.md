@@ -2,6 +2,7 @@
 
 Overview:
 - Bare bones
+- Assumes Mac OS environment
 - Contains VS Code configs & settings
 
 
