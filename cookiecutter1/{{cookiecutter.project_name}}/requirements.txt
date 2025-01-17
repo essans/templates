@@ -9,3 +9,4 @@
 #pipreqs /home/project/location
 
 pandas==2.2.3
+pyaml==6.0.2
