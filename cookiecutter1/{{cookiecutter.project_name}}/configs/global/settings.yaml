@@ -16,5 +16,5 @@ model:
   checkpoints_dir: "models/checkpoints/"
 
 credentials:
-  s3_credentials: "/USERS/{{cookiecutter.username}/.aws/credentials"
+  s3_credentials: "/USERS/{{cookiecutter.username}}/.aws/credentials"
 
