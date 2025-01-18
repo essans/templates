@@ -29,7 +29,7 @@ class ProjectConfigs:
 
 
     def configs_from_yaml(self):
-        return self.yaml_to_dict(self.root_dir() / 'configs' / 'global' / 'settings.yaml')
+        return self.yaml_to_dict(self.root_dir() / 'configs' / 'settings.yaml')
 
 
     def print_global_configs(self):
