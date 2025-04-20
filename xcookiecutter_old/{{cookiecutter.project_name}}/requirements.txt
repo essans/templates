@@ -7,5 +7,8 @@
 
 #pip install pipreqs
 #pipreqs /home/project/location
-  
-pip==23.1.2
+
+pandas==2.2.3
+pyyaml==6.0.2
+git+https://github.com/essans/gsd.git
+#git+https://github.com/essans/gsd.git@v0.1.0

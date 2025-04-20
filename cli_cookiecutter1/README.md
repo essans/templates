@@ -17,7 +17,7 @@ Overview:
    
 <br>
 
-### option2: create new project based on remote bbgithub cookiecutter:
+### option2: create new project based on remote github cookiecutter:
    (1) from location where new project is to be created:<br>
    
    ```

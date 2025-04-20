@@ -1,8 +1,17 @@
-## Repository for templates and cookiecutters
+# templates
+Templates, Cookiecutters etc
 
-Contains the following:
+<br> 
 
-1. **cookiecutter1**: v1 generic cookiecutter.
+## Available Cookiecutters
 
-   - Bare bones
+### cookiecutter1: 
+- bare-bones
+### cookiecutter2: 
+Additional features:
+- vs code, env settings
+- gsd in requirements.txt
+- starting notebook
+### cookiecutter3: 
+- v1 for a streamlit template
 
