@@ -1,0 +1,26 @@
+#when using a conda env
+#conda list --export > requirements.txt
+
+
+#pip freeze > requirements.txt
+#pip install -r requirements.txt
+
+#pip install pipreqs
+#pipreqs /home/project/location
+  
+boto3==1.35.93    
+botocore==1.35.93
+Datetime==5.5    
+ipykernel==6.29.5     
+ipython==8.23.0           
+jupyter_client==8.6.3      
+jupyter_core==5.7.2            
+numpy==2.2.1       
+pandas==2.2.3      
+pip==23.1.2        
+PyYAML==6.0.2          
+s3fs==2024.12.0  
+s3transfer==0.10.4     
+setuptools==65.5.0     
+streamlit==1.42.2
+git+https://github.com/essans/gsd.git

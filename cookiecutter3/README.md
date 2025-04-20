@@ -1,6 +1,7 @@
-### cookiecutter2
+### cookiecutter3
  - vs code, env settings
  - includes gsd in requirements.txt
+ - v1 for use for streamlit apps
 
 <br> 
 
@@ -8,12 +9,9 @@
 (1) clone to local<br>
 (2) from location where new project is to be created:
 ```
-cookiecutter /path/to/cookiecutter_local_repo/cookiecutter2
+cookiecutter /path/to/cookiecutter_local_repo/cookiecutter3
 ```
 
 #### option2: create new project based on remote bbgithub cookiecutter:
 ```
-cookiecutter git@github:/essans/template.git --directory cookiecutter2 -c main
-
-cookiecutter git@github:/essans/template.git --directory cookiecutter2 -c branchname
 ```

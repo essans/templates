@@ -20,7 +20,8 @@ pip install -r requirements.txt
 
 ### Usage
 ```bash
-chmod +x /scripts/*
+cd src
+streamlit run app.py
 ```
 
 ### Structure
