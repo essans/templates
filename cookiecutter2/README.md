@@ -1,18 +1,29 @@
-### cookiecutter1 
- - bare bones
+## {{cookiecutter.project_name}}
 
-<br> 
+### Overview
+#### {{cookiecutter.description}}
 
-#### option1: clone from local cookiecutter:
-(1) clone to local<br>
-(2) from location where new project is to be created:
+### Environment set-up
+
+Using pip
+```bash
+python -m venv {{cookiecutter.project_name}}_env
+source {{cookiecutter.project_name}}_env/bin/activate
+{{cookiecutter.project_name}}_env\Scripts\activate #windows
+pip install -r requirements.txt
+deactivate #when done
 ```
-cookiecutter /path/to/cookiecutter_local_repo/cookiecutter1
+
+### Dependencies
+```
+pip install -r requirements.txt
 ```
 
-#### option2: create new project based on remote github cookiecutter:
+### Usage
+```bash
+chmod +x /scripts/*
 ```
-cookiecutter git@github:/essans/template.git --directory cookiecutter1 -c main
 
-cookiecutter git@github:/essans/template.git --directory cookiecutter1 -c branchname
+### Structure
+```bash
 ```
