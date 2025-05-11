@@ -9,7 +9,5 @@ outputs:
   logs_dir: "outputs/logs/"
 
 credentials:
-  s3_credentials: "/USERS/{{cookiecutter.username}}/.aws/credentials"
-  hf_api_token: "/USERS/{{cookiecutter.username}}/.hf/credentials"
-  openai_key: "/USERS/{{cookiecutter.username}}/.openai/credentials"
-  perplexity_key: "USERS/{{cookiecutter.username}}/.perplexity/credentials"
+  aws: "/USERS/essans/.aws/credentials"
+  other: "/USERS/essans/.credentials"
