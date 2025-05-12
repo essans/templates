@@ -7,13 +7,7 @@ input_data:
 outputs:
   outputs_dir: "outputs/"
   logs_dir: "outputs/logs/"
-  predictions_dir: "outputs/predictions/"
-  visualizations_dir: "outputs/visualizations/"
-  metrics_dir: "outputs/metrics/"
-
-model:
-  model_dir: "models/"
-  checkpoints_dir: "models/checkpoints/"
 
 credentials:
-  s3_credentials: "/USERS/{{cookiecutter.username}}/.aws/credentials"
+  s3_credentials: "/USERS/{{cookiecutter.username}}/.aws"
+  other: "USERS/{{cookiecutter.username}}/.credentials"
