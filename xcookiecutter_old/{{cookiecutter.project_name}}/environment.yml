@@ -1,0 +1,13 @@
+name: {{cookiecutter.project_name}}_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python={{cookiecutter.python_version}}
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - pip
+  - pip:
+    - cookiecutter

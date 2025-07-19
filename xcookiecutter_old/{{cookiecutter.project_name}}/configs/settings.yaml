@@ -1,0 +1,22 @@
+project_name: {{cookiecutter.project_name}}
+
+input_data:
+  raw_dir: "data/raw/"
+  processed_dir: "data/processed/"
+
+outputs:
+  outputs_dir: "outputs/"
+  logs_dir: "outputs/logs/"
+  predictions_dir: "outputs/predictions/"
+  visualizations_dir: "outputs/visualizations/"
+  metrics_dir: "outputs/metrics/"
+
+model:
+  model_dir: "models/"
+  checkpoints_dir: "models/checkpoints/"
+
+credentials:
+  s3_credentials: "/USERS/{{cookiecutter.username}}/.aws/credentials"
+  hf_api_token: "/USERS/{{cookiecutter.username}}/.hf/credentials"
+  openai_key: "/USERS/{{cookiecutter.username}}/.openai/credentials"
+  perplexity_key: "USERS/{{cookiecutter.username}}/.perplexity/credentials"
