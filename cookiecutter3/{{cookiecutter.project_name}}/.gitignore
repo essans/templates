@@ -14,7 +14,7 @@ venv/
 .venv/
 
 # Ignore outputs and temporary files
-outputs/*
+outputs/**/*.*
 outputs/logs/*
 
 # Allow .gitkeep files to be tracked
