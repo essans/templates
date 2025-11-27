@@ -3,7 +3,7 @@
 ### Overview
 #### {{cookiecutter.description}}
 
-Created with cookiecutter2 template: "https://github.com/{{cookiecutter.username}}/templates/tree/main/cookiecutter2"
+Created with cookiecutter2 template: "https://github.com/essans/templates/tree/main/cookiecutter2"
 
 ### Environment set-up
 Using pip and virtualenv
@@ -86,23 +86,21 @@ chmod +x /scripts/*
 ### Create git remote and local repo
 ```bash
 gh auth status
-gh auth switch --user {{cookiecutter.username}}
+gh auth switch --user <your-gh-username>
 
-gh repo list #--source #--limit
+# gh repo list #--source #--limit
 
-git config user.name  "myName"
-git config user.email "myName@domain.com" 
+# git config user.name  "myName"
+# git config user.email "myName@domain.com" 
 
-gh repo create <repo_name> --private
+gh repo create {{cookiecutter.project_name}} --private
 
 git init
-#echo "# <repo_name>" >> README.md
+
 git add . #git add README.md
 
 git commit -m "first commit"
 git branch -M main
-git remote add origin git@github.com:{{cookiecutter.username}}:/{{cookiecutter.project_name}}.git
+git remote add origin git@github.com:<org-or-user>/{{cookiecutter.project_name}}.git
 git push -u origin main
 ```
-
-
