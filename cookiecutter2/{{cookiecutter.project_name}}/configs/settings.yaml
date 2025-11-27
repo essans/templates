@@ -9,5 +9,5 @@ outputs:
   logs_dir: "outputs/logs/"
 
 credentials:
-  aws: "/USERS/essans/.aws"
-  other: "/USERS/essans/.credentials"
+  aws: "/USERS/{{cookiecutter.username}}/.aws"
+  other: "/USERS/{{cookiecutter.username}}/.credentials"

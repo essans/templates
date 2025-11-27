@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=65.5", "wheel"]  #or use 61.0 for max compatability
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{cookiecutter.project_name}}" # | lower | replace(' ', '-') }}"
+version = "0.1.0"
+description = "{{cookiecutter.description}}"
+readme = "README.md"
+requires-python = ">={{cookiecutter.python_version}}"
+
+license = { text = "MIT" }
+
+dependencies = [
+  "numpy>=2.2,<3",
+  "pandas>=2.2,<3",
+  "PyYAML>=6.0,<7",
+  "tqdm>=4.67,<5",
+  "ipykernel>=6.29,<7",  #dev
+  "ipython>=8.23,<9",    #dev
+  "jupyter_client>=8.6,<9",  #dev
+  "jupyter_core>=5.7,<6", #dev 
+
+  "gsd @ git+https://github.com/essans/gsd.git@main"
+]
+
+
+[project.optional-dependencies]
+dev = [
+  "ipykernel>=6.29,<7",
+  "ipython>=8.23,<9",
+  "jupyter_client>=8.6,<9",
+  "jupyter_core>=5.7,<6"
+
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}  # pip install -e .
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.urls]
+Homepage = "https://github.com/{{ cookiecutter.username }}/{{ cookiecutter.project_name }}"
+Repository = "https://github.com/{{ cookiecutter.username }}/{{ cookiecutter.project_name }}"
+

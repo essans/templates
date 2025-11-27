@@ -10,7 +10,7 @@
   
 boto3==1.35.93    
 botocore==1.35.93
-Datetime==5.5    
+datetime==5.5    
 ipykernel==6.29.5     
 ipython==8.23.0           
 jupyter_client==8.6.3      
