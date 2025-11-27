@@ -6,8 +6,13 @@
 Created with cookiecutter2 template: "https://github.com/{{cookiecutter.username}}/templates/tree/main/cookiecutter2"
 
 ### Environment set-up
-Using pip
+Using pip and virtualenv
 ```bash
+# Activate your default environment
+python -m venv ~/environments/venv #if default environment not set up
+source ~/environments/venv/bin/activate
+
+# Create project specific virtual environment
 python -m venv {{cookiecutter.project_name}}_env
 source {{cookiecutter.project_name}}_env/bin/activate
 
