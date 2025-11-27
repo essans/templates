@@ -81,3 +81,28 @@ chmod +x /scripts/*
 ```
 
 `.env` sets `PYTHONPATH` for tooling, `.vscode/settings.json` ships workspace defaults (formatting, terminals, etc.), and `pyproject.toml` captures the project metadata plus runtime/dev dependencies for editable installs.
+
+
+### Create git remote and local repo
+```bash
+gh auth status
+gh auth switch --user {{cookiecutter.username}}
+
+gh repo list #--source #--limit
+
+git config user.name  "myName"
+git config user.email "myName@domain.com" 
+
+gh repo create <repo_name> --private
+
+git init
+#echo "# <repo_name>" >> README.md
+git add . #git add README.md
+
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:{{cookiecutter.username}}:/{{cookiecutter.project_name}}.git
+git push -u origin main
+```
+
+
