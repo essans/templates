@@ -104,3 +104,15 @@ git branch -M main
 git remote add origin git@github.com:<org-or-user>/{{cookiecutter.project_name}}.git
 git push -u origin main
 ```
+
+#### If remote needs to be updated then:
+```bash
+git remote -v # show remotes
+git remote remove origin # in case need to remove (then git remote add origin <new-url>)
+
+# or
+git remote set-url origin git@github.com:essans/{{cookiecutter.project_name}}.git # in case to update URL
+
+#then as before
+git push -u origin main
+```
