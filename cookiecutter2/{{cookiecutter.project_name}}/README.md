@@ -26,6 +26,14 @@ source {{cookiecutter.project_name}}_env/bin/activate
 pip install -e .
 ```
 
+# if need to upgrade later
+```
+pip install -e . --upgrade
+
+#or more aggressively pip install -e . --force-reinstall
+
+```
+
 ### Use this instead if the project exposes a dev extra for tooling/test deps.
 ```
 pip install -e .[dev]
