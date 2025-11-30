@@ -24,11 +24,13 @@ source {{cookiecutter.project_name}}_env/bin/activate
 ### Install the project in editable mode so console scripts and imports always point to your local source tree.
 ```
 pip install -e .
+pip install -e ".[dev]" # if dev extra is defined
 ```
 
 # if need to upgrade later
 ```
 pip install -e . --upgrade
+pip install -e ".[dev]" --upgrade
 
 #or more aggressively pip install -e . --force-reinstall
 
