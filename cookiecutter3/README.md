@@ -1,7 +1,7 @@
 ### cookiecutter3
  - vs code, env settings
- - includes gsd in requirements.txt
- - v1 for use for streamlit apps
+ - starter notebook including adaptation for google colab use
+ - includes utils.py and logging_utils.py in src/
 
 <br> 
 
@@ -14,4 +14,7 @@ cookiecutter /path/to/cookiecutter_local_repo/cookiecutter3
 
 #### option2: create new project based on remote bbgithub cookiecutter:
 ```
+cookiecutter git@github:/essans/template.git --directory cookiecutter3 -c main
+
+cookiecutter git@github:/essans/template.git --directory cookiecutter3 -c branchname
 ```

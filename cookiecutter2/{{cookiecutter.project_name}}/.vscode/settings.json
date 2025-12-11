@@ -1,7 +1,7 @@
 {
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.extraPaths": ["${workspaceFolder}/src"],
-    "jupyter.notebookFileRoot": "${workspaceFolder}/src",
-    "python.defaultInterpreterPath": "~/environments/venv/bin/python"
+    "jupyter.notebookFileRoot": "${workspaceFolder}/src"{% if cookiecutter.venv_name %},
+    "python.defaultInterpreterPath": "${env:HOME}/environments/{{cookiecutter.venv_name}}/bin/python"{% endif %}
 
   }

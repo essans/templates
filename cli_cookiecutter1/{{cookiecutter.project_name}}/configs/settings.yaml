@@ -1,12 +1,12 @@
 project_name: {{cookiecutter.project_name}}
 
 input_data:
-  raw_dir: "data/raw/"
-  processed_dir: "data/processed/"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
 
 outputs:
-  outputs_dir: "outputs/"
-  logs_dir: "outputs/logs/"
+  outputs_dir: "outputs"
+  logs_dir: "outputs/logs"
 
 credentials:
   s3_credentials: "/USERS/{{cookiecutter.username}}/.aws"

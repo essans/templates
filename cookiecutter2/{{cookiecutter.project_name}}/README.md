@@ -9,15 +9,11 @@ Created with cookiecutter2 template: "https://github.com/essans/templates/tree/m
 Using pip and virtualenv
 ```bash
 # Activate your default environment
-python -m venv ~/environments/venv #if default environment not set up
-source ~/environments/venv/bin/activate
+python -m venv ~/environments/{{cookiecutter.venv_name}} #if specified in setup
+source ~/environments/{{cookiecutter.venv_name}}/bin/activate
 
-# Create project specific virtual environment
-python -m venv {{cookiecutter.project_name}}_env
-source {{cookiecutter.project_name}}_env/bin/activate
+# or, create project specific virtual environment within vscode
 
-# windows use:
-{{cookiecutter.project_name}}_env\Scripts\activate 
 ```
 <br>
 
