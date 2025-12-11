@@ -38,3 +38,8 @@ src/__pycache__/*
 src/userlist.py
 src/tests/*
 notebooks/*
+
+
+#models
+models
+models/*

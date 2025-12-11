@@ -35,3 +35,7 @@ dist/
 
 #other
 src/__pycache__/*
+
+#models
+models
+models/*
