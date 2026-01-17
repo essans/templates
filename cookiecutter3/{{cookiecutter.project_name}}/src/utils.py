@@ -1,15 +1,19 @@
 
-import os
+import os, shutil
 import sys
+from tqdm import tqdm #type: ignore
 from pathlib import Path
-from typing import Any, Dict, Optional, List, Union
-import yaml
+from typing import Any
+from types import SimpleNamespace
+import yaml  # type: ignore
 import configparser
 import datetime as dt
-import pandas as pd
+import pandas as pd #type: ignore
+import logging
 
+import colab
 
-def get_project_root() -> Optional[Path]:
+def get_project_root() -> Path:
 
     """
     Return the absolute path to the project root directory by walking parents
@@ -18,22 +22,37 @@ def get_project_root() -> Optional[Path]:
     path = Path().absolute()
     markers = ['data', 'src', 'notebooks', '.git', 'configs', 'scripts']
 
-
     while path != path.parent:
             if any((path / marker).exists() for marker in markers):
                 return path
             path = path.parent
-    return None
+    
+    print("Could not explicitly determine project root")
+    return path.parent
 
 
-def configs_from_yaml(dir: str = 'configs', filename: str = 'settings.yaml') -> Dict[str, Any]:
+def to_namespace(obj: dict[str, Any]) -> SimpleNamespace:
+    """
+    Helper function to convert attributes into a class-like namespace
+    """
+    if isinstance(obj, dict):
+        ns = SimpleNamespace()
+        for key, value in obj.items():
+            setattr(ns, key, to_namespace(value))
+        return ns
+    if isinstance(obj, list):
+        return [to_namespace(item) for item in obj]
+    return obj
+
+
+def configs_from_yaml(path: Path | str = "configs/settings.yaml") -> SimpleNamespace:
         root = get_project_root()
         if root is None:
             raise RuntimeError('Unable to determine project root directory.')
-        return yaml_to_dict(root / dir / filename)
+        return to_namespace(yaml_to_dict(root / path))
 
 
-def yaml_to_dict(filepath: Union[str, Path]) -> Dict[str, Any]:
+def yaml_to_dict(filepath: str|Path) -> dict[str, Any]:
         """
         Reads a YAML file and returns data in form of dictionary.
         """
@@ -45,8 +64,8 @@ def yaml_to_dict(filepath: Union[str, Path]) -> Dict[str, Any]:
             return {}
         
 
-def load_credentials(credentials_json: Dict[str, str]) -> Dict[str, Dict[str, Dict[str, str]]]:
-        creds = credentials_json
+def load_credentials(credentials: dict[str, Any]) -> dict[str, Any]:
+        creds = credentials
         result = {}
 
         for key, path in creds.items():
@@ -87,7 +106,8 @@ def load_credentials(credentials_json: Dict[str, str]) -> Dict[str, Dict[str, Di
 
  
 def set_env_from_creds(
-    target: Optional[Union[str, List[str]]] = None, verbose: bool = False,
+    target: str | list[str] | None = None, 
+    verbose: bool = False,
     ) -> None:
 
     # Need to add special handling for LangFuse
@@ -107,7 +127,7 @@ def set_env_from_creds(
     process_all = 'all' in target_list
 
     configs = configs_from_yaml()
-    credentials = load_credentials(configs.get('credentials', {}))
+    credentials = load_credentials(vars(configs.credentials))  #get('credentials', {}))
 
     skipped = []
 
@@ -148,6 +168,25 @@ def set_env_from_creds(
 
 
 
+def set_hf_creds(environ: str) -> None:
+    try:
+        if environ =='local':
+            set_env_from_creds(target = 'hf', verbose=False)
+
+        if environ =='ec2':
+            import aws_utils
+            aws_utils.set_ec2_credentials(secret_name = 'hf/api_key', region = 'us-east-1')
+
+        if environ=='colab':
+            colab.colab_set_hf_token()
+    except:
+        print(f"Failed to set HF credentials for environment: {environ}")
+        raise ValueError(f"Invalid or unsupported environment: {environ}. 'local', 'ec2', 'colab'.")
+
+
+
+
+
 class Timer:
     """
     Convenience timer methods.
@@ -157,11 +196,11 @@ class Timer:
          .elapsed(message='', periodicity='s')
          .end(periodicity='s')
     """
-    
+
     def __init__(self) -> None:
-        self.start_time: Optional[dt.datetime] = None
-        self.timestamp: Optional[dt.datetime] = None
-        self.end_time: Optional[dt.datetime] = None
+        self.start_time: dt.datetime | None = None
+        self.timestamp: dt.datetime | None = None
+        self.end_time: dt.datetime | None = None
 
     @staticmethod
     def format_time(time_obj: dt.datetime) -> str:
@@ -207,7 +246,11 @@ class Timer:
             print(f'\nEnd time: {self.format_time(self.end_time)}')
 
             total_elapsed = (self.end_time - self.start_time).total_seconds()
-            since_last_timestamp = (self.end_time - self.timestamp).total_seconds()
+
+            if self.timestamp is None:
+                since_last_timestamp = total_elapsed
+            else:
+                since_last_timestamp = (self.end_time - self.timestamp).total_seconds()
 
             if periodicity.lower() in ['m', 'min', 'mins', 'minutes', 'minute']:
                 print(f'Wall time: {total_elapsed / 60:.1f} minutes '
@@ -232,7 +275,9 @@ class Timer:
                 return dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
             
 
-def pd_format(maxRows=50, maxCols=20, maxColWidth=50, displayWidth=250):
+def pd_format(maxRows: int=50, maxCols: int=20, 
+              maxColWidth: int=50, displayWidth:int=250
+              ) -> None:
     """
     Convenience function for setting dataframe defaults
     """
