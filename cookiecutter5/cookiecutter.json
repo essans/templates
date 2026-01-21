@@ -1,0 +1,8 @@
+{
+    "project_name": "new_project",
+    "author_name":"<First><Last>",
+    "username":"<username>",
+    "description":"What this is about",
+    "python_version":3.12,
+    "venv_name":""
+}
