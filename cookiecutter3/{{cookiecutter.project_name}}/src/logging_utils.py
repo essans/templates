@@ -7,7 +7,7 @@ import utils
 
 PROJECT_ROOT = utils.get_project_root()
 
-DEFAULT_LOG_FILE = PROJECT_ROOT / "outputs" / "logs" / {{cookiecutter.project_name}}.log"
+DEFAULT_LOG_FILE = PROJECT_ROOT / "outputs" / "logs" / "{{cookiecutter.project_name}}.log"
 DEFAULT_LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 

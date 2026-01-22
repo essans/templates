@@ -5,9 +5,9 @@ from typing import Union
 
 import utils
 
-PROJECT_ROOT = helper.get_project_root()
+PROJECT_ROOT = utils.helper.get_project_root()
 
-DEFAULT_LOG_FILE = PROJECT_ROOT / "outputs" / "logs" / {{cookiecutter.project_name}}.log"
+DEFAULT_LOG_FILE = PROJECT_ROOT / "outputs" / "logs" / "{{cookiecutter.project_name}}.log"
 DEFAULT_LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 
