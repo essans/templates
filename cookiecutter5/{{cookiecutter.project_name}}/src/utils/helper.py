@@ -174,7 +174,7 @@ def set_hf_creds(environ: str) -> None:
             set_env_from_creds(target = 'hf', verbose=False)
 
         if environ =='ec2':
-            import aws_utils
+            import utils.aws_utils as aws_utils
             aws_utils.set_ec2_credentials(secret_name = 'hf/api_key', region = 'us-east-1')
 
         if environ=='colab':
