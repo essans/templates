@@ -31,9 +31,12 @@ def get_project_root() -> Path:
     return path.parent
 
 
-def to_namespace(obj: dict[str, Any]) -> SimpleNamespace:
+def to_namespace(obj: Any) -> Any:
     """
-    Helper function to convert attributes into a class-like namespace
+    Recursively convert dictionaries to SimpleNamespace objects.
+
+    Lists are preserved as lists (with converted items), and scalar values are
+    returned unchanged.
     """
     if isinstance(obj, dict):
         ns = SimpleNamespace()

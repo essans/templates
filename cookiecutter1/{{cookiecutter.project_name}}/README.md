@@ -3,7 +3,7 @@
 ### Overview
 #### {{cookiecutter.description}}
 
-Created with cookiecutter2 template: "https://github.com/essans/templates/tree/main/cookiecutter2"
+Created with cookiecutter1 template: "https://github.com/essans/templates/tree/main/cookiecutter1"
 
 ### Environment set-up
 Using pip and virtualenv

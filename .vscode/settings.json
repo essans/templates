@@ -1,5 +1,7 @@
 {
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.extraPaths": ["${workspaceFolder}/src"],
-    "jupyter.notebookFileRoot": "${workspaceFolder}/src"
+    "jupyter.notebookFileRoot": "${workspaceFolder}/src", // off, basic, standard
+    "python.analysis.typeCheckingMode": "strict"
 }
+
