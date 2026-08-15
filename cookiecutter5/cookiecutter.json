@@ -4,5 +4,6 @@
     "username":"<username>",
     "description":"What this is about",
     "python_version":3.12,
-    "venv_name":"~/environments/default_env"
+    "venv_name":"",
+    "create_gh_repo":"N"
 }
