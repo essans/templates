@@ -5,5 +5,5 @@
     "description":"What this is about",
     "python_version":3.12,
     "venv_name":"",
-    "create_gh_repo":"N"
+    "create_gh_repo": ["N", "Y"]
 }
