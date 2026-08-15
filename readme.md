@@ -26,3 +26,5 @@ Additional features:
 ### cookiecutter4: 
 - v1 for a streamlit template (needs updating)
 
+
+`git update-index --chmod=+x hooks/post_gen_project.sh`
