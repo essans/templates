@@ -64,40 +64,89 @@ def s3_ls(bucket_name: str, prefix: str = "") -> list[str]:
     return keys
 
 
+def s3_ls2(bucket_name: str, prefix: str = "", folders_only: bool = False) -> list[str]:
+    """List S3 objects or virtual folders beneath an optional prefix."""
+    import boto3
 
-def s3_download_files(local_dest_folder: Path,
-                      run_cfg: SimpleNamespace,
-                      force: bool = False
-                      ) -> None:
-    """
-    Download a list of files from an S3 bucket to a local folder.
-    Args:
-        bucket_name (str): Name of the S3 bucket.
-        s3_paths (list[str]): List of S3 object keys to download.
-        local_dest_folder (str): Local directory to save files.
-        force (bool): If True, download even if file exists locally.
-    """
     s3 = boto3.client("s3")
-    os.makedirs(local_dest_folder, exist_ok=True)
 
-    source_dir = run_cfg.datasets.dataset1.s3_path
-    print(f'source_path: {source_dir}')
+    request = {
+        "Bucket": bucket_name,
+        "Prefix": prefix,
+    }
 
-    bucket_name, prefix = bucket, path = str(source_dir).split('/', 1)
+    if folders_only:
+        # Makes S3 return immediate child prefixes in CommonPrefixes.
+        request["Delimiter"] = "/"
 
-    s3_paths_list = s3_ls(bucket_name, prefix)
-    print(s3_paths_list)
-    
-    for s3_path in tqdm(s3_paths_list, desc="Downloading S3 files"):
-        local_path = os.path.join(local_dest_folder, os.path.basename(s3_path))
-        if not force and os.path.exists(local_path):
-            print(f"Skipping {local_path}, already exists.")
+    response = s3.list_objects_v2(**request)
+
+    if folders_only:
+        return [
+            item["Prefix"]
+            for item in response.get("CommonPrefixes", [])
+        ]
+
+    return [
+        item["Key"]
+        for item in response.get("Contents", [])
+    ]
+
+
+
+def s3_download_files(
+    s3_source_path: str,
+    local_dest_folder: Path,
+    force: bool = False,
+) -> None:
+    """
+    Download all objects under an S3 path to a local directory.
+
+    Args:
+        s3_source_path: Source path in the form
+            ``s3://bucket-name/optional/prefix/``.
+        local_dest_folder: Local directory where files are downloaded.
+        force: If True, download files even when they already exist locally.
+
+    Raises:
+        ValueError: If ``s3_source_path`` is not a valid S3 URI.
+    """
+    if not s3_source_path.startswith("s3://"):
+        raise ValueError(
+            "s3_source_path must use the format "
+            "'s3://bucket-name/optional/prefix/'."
+        )
+
+    bucket_name, _, prefix = s3_source_path.removeprefix("s3://").partition("/")
+    if not bucket_name:
+        raise ValueError("s3_source_path must include a bucket name.")
+
+    if prefix and not prefix.endswith("/"):
+        prefix += "/"
+
+    local_dest_folder = Path(local_dest_folder)
+    local_dest_folder.mkdir(parents=True, exist_ok=True)
+
+    s3 = boto3.client("s3")
+    s3_paths = s3_ls(bucket_name, prefix)
+
+    for s3_path in tqdm(s3_paths, desc="Downloading S3 files"):
+        if s3_path.endswith("/"):
             continue
+
+        # Retain subdirectories below the supplied source prefix.
+        local_path = local_dest_folder / s3_path.removeprefix(prefix)
+        local_path.parent.mkdir(parents=True, exist_ok=True)
+
+        if local_path.exists() and not force:
+            print(f"Skipping {local_path}; it already exists.")
+            continue
+
         try:
-            s3.download_file(bucket_name, s3_path, local_path)
-            print(f"Downloaded {s3_path} to {local_path}")
-        except Exception as e:
-            print(f"Failed to download {s3_path}: {e}")
+            s3.download_file(bucket_name, s3_path, str(local_path))
+        except ClientError as error:
+            print(f"Failed to download s3://{bucket_name}/{s3_path}: {error}")
+
 
 
 def upload_directory_to_s3(local_dir: str, bucket_name: str, s3_prefix: str = "") -> None:
