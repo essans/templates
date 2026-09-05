@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# GitHub CLI is required for this template's automation, so verify it before doing anything else
+if ! command -v gh &> /dev/null; then
+    echo "Error: GitHub CLI (gh) is not installed."
+    echo "Install it from https://cli.github.com/ and re-run 'cookiecutter' once it's available."
+    exit 1
+fi
+
+if ! gh auth status &> /dev/null; then
+    echo "Error: GitHub CLI (gh) is installed but not authenticated."
+    echo "Run 'gh auth login' to authenticate, then re-run 'cookiecutter' to generate the project."
+    exit 1
+fi
+
 # Always initialize the local git repository
 git init
 git add .
@@ -10,18 +23,10 @@ CREATE_REPO="{{ cookiecutter.create_gh_repo | lower }}"
 
 # Check if the user entered 'y' or 'yes'
 if [[ "$CREATE_REPO" == "y" || "$CREATE_REPO" == "yes" ]]; then
-    
-    # Ensure the user has the GitHub CLI installed
-    if command -v gh &> /dev/null; then
-        echo "Creating GitHub repository..."
-        # Using project_name for the repo name here, adjust if needed
-        gh repo create "{{ cookiecutter.project_name }}" --private --source=. --remote=origin --push
-        echo "Successfully created and pushed to GitHub!"
-    else
-        echo "Warning: GitHub CLI (gh) is not installed. Could not create the remote repository."
-        echo "You will need to create it manually and push."
-    fi
-
+    echo "Creating GitHub repository..."
+    # Using project_name for the repo name here, adjust if needed
+    gh repo create "{{ cookiecutter.project_name }}" --private --source=. --remote=origin --push
+    echo "Successfully created and pushed to GitHub!"
 else
     echo "Local repository initialized. Skipping GitHub creation as requested."
 fi
