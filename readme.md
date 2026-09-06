@@ -27,4 +27,11 @@ Additional features:
 - v1 for a streamlit template (needs updating)
 
 
+
+### cookiecutter6: 
+- v5 updated to allow for neocloud machines and cloudflare R2
+- Backward compatability for local and EC2
+
+
+
 `git update-index --chmod=+x hooks/post_gen_project.sh`

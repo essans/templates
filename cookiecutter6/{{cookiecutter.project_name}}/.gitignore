@@ -1,0 +1,42 @@
+# data files
+data/raw/*
+data/processed/*
+
+# Allow .gitkeep files to be tracked
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# model checkpoints
+models/checkpoints
+
+# Ignore Python virtual environment
+venv/
+.venv/
+
+# Ignore outputs and temporary files
+outputs/**/*.*
+outputs/logs/*
+
+# Allow .gitkeep files to be tracked
+!outputs/.gitkeep
+!outputs/logs/.gitkeep
+
+# Ignore IDE configurations
+#.vscode/
+#.idea/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+
+#other
+src/__pycache__/*
+
+#models
+models
+models/*
+
