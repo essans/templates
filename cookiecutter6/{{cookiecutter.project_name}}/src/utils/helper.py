@@ -162,6 +162,17 @@ def set_env_from_creds(
                 os.environ[f'{k.upper()}_API_KEY'] = v2.get('api_key')
                 print(f'set environment variable for default: {k.upper()}_API_KEY')
 
+            elif service == 'cloudflare' and k2 == 'default':
+                set_any = False
+                for field, value in v2.items():
+                    if isinstance(value, str):
+                        os.environ[field.upper()] = value
+                        print(f'set environment variable for default: {field.upper()}')
+                        set_any = True
+
+                if not set_any:
+                    skipped.append(f'{k}[{k2}]')
+
             else:
                 skipped.append(f'{k}[{k2}]')
 
@@ -289,3 +300,4 @@ def pd_format(maxRows: int=50, maxCols: int=20,
     pd.set_option('display.max_columns', maxCols)
     pd.set_option('display.max_colwidth', maxColWidth)
     pd.set_option('display.width', displayWidth)
+

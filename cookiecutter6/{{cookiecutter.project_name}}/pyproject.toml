@@ -11,6 +11,7 @@ requires-python = ">={{cookiecutter.python_version}}"
 
 license = { text = "MIT" }
 
+#Install with: pip install -e .
 dependencies = [
   "boto3",
   "s3fs",
@@ -18,17 +19,17 @@ dependencies = [
   "pandas>=2.2,<3",
   "pyarrow>=12.0,<22.2",
   "PyYAML>=6.0,<7",
-  "tqdm>=4.67,<5"
-]
-
-
-[project.optional-dependencies]
-dev = [
+  "tqdm>=4.67,<5",
   "ipykernel>=6.29,<7",
   "ipython>=8.23,<9",
   "jupyter_client>=8.6,<9",
   "jupyter_core>=5.7,<6",
-  "ipywidgets>=8.1,<9",
+  "ipywidgets>=8.1,<9"
+]
+
+
+[project.optional-dependencies] #Install with: pip install -e ".[dev]"
+dev = [
   "ruff>=0.6",
   "mypy>=1.13",
   "pytest>=8"

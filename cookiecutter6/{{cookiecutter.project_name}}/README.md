@@ -122,3 +122,14 @@ git remote set-url origin git@github.com:essans/{{cookiecutter.project_name}}.gi
 #then as before
 git push -u origin main
 ```
+
+### Storage
+```
+aws_utils.s3_buckets()
+aws_utils.s3_ls2("essans-llm",prefix="", folders_only=True)
+
+cloudflare_utils.r2_buckets()
+cloudflare_utils.r2_ls2("essans-llm", folders_only=True)
+cloudflare_utils.r2_ls2("essans-llm", prefix="", folders_only=True)
+cloudflare_utils.r2_download_files("r2://essans-llm/ollama",project_dir / outputs_dir)
+```
