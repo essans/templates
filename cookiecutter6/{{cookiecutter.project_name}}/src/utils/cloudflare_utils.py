@@ -5,7 +5,8 @@ from typing import Any
 
 import boto3
 from botocore.exceptions import ClientError
-from tqdm import tqdm
+#from tqdm import tqdm
+from tqdm.autonotebook import tqdm
 
 from .aws_utils import get_aws_secret
 

@@ -274,19 +274,37 @@ class Timer:
                     f'({since_last_timestamp:.0f} seconds since last timestamp)\n')
 
     @staticmethod            
-    def get_timestamp(timestamp_format: str = 'YYYY-MM-DD_HHMMSS') -> str:
+    # def get_timestamp(timestamp_format: str = 'YYYY-MM-DD_HHMMSS') -> str:
+    #     """
+    #     Returns a conveniently formated timestamp for use in filenames, logs etc
+    #     """
+    #     if timestamp_format == 'YYYY-MM-DD_HHMMSS':
+    #         return dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
+        
+    #     else:
+    #         try:
+    #             return dt.datetime.now().strftime(str(timestamp_format))
+            
+    #         except:
+    #             return dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
+
+
+    def get_timestamp(timestamp_format: str = 'YYYY-MM-DD_HHMMSS', utc: bool = False) -> str:
         """
-        Returns a conveniently formated timestamp for use in filenames, logs etc
+        Returns a conveniently formated timestamp for use in filenames, logs etc.
+        Set utc=True to generate the timestamp in UTC.
         """
+        now_dt = dt.datetime.now(dt.timezone.utc) if utc else dt.datetime.now()
+
         if timestamp_format == 'YYYY-MM-DD_HHMMSS':
-            return dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
+            return now_dt.strftime("%Y-%m-%d_%H%M%S")
         
         else:
             try:
-                return dt.datetime.now().strftime(str(timestamp_format))
+                return now_dt.strftime(str(timestamp_format))
             
             except:
-                return dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
+                return now_dt.strftime("%Y-%m-%d_%H%M%S")
             
 
 def pd_format(maxRows: int=50, maxCols: int=20, 

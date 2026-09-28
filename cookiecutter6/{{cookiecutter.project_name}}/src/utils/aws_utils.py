@@ -3,7 +3,8 @@ from botocore.exceptions import ClientError
 import base64
 import os
 from pathlib import Path
-from tqdm import tqdm 
+#from tqdm import tqdm
+from tqdm.autonotebook import tqdm
 from types import SimpleNamespace
 from typing import Any
 
