@@ -10,9 +10,32 @@ from tqdm.autonotebook import tqdm
 
 from .aws_utils import get_aws_secret
 
+_R2_SSM_PARAMETERS = {
+    "CLOUDFLARE_ACCOUNT_ID": "/cloudflare/account_id",
+    "R2_ACCESS_KEY_ID": "/cloudflare/r2/access_key_id",
+    "R2_SECRET_ACCESS_KEY": "/cloudflare/r2/secret_access_key",
+}
+
+
+def _ensure_r2_credentials(account_id: str | None = None) -> None:
+    missing = {
+        variable: name
+        for variable, name in _R2_SSM_PARAMETERS.items()
+        if not os.getenv(variable) and not (variable == "CLOUDFLARE_ACCOUNT_ID" and account_id)
+    }
+    if not missing:
+        return
+
+    ssm = boto3.client("ssm", region_name="us-east-1")
+    for variable, name in missing.items():
+        os.environ[variable] = ssm.get_parameter(
+            Name=name, WithDecryption=True
+        )["Parameter"]["Value"]
+
 
 def get_r2_client(account_id: str | None = None) -> Any:
     """Build a boto3 client pointed at Cloudflare R2's S3-compatible endpoint."""
+    _ensure_r2_credentials(account_id)
     account_id = account_id or os.getenv("CLOUDFLARE_ACCOUNT_ID")
     if not account_id:
         raise ValueError("account_id must be provided or set via CLOUDFLARE_ACCOUNT_ID.")
@@ -153,7 +176,10 @@ def r2_download_files(
             print(f"Failed to download r2://{bucket_name}/{r2_path}: {error}")
 
 
-def upload_directory_to_r2(local_dir: str, bucket_name: str, r2_prefix: str = "") -> None:
+def upload_directory_to_r2(local_dir: str, 
+                           bucket_name: str, 
+                           r2_prefix: str = "", 
+                           verbose: bool = True) -> None:
     """
     Upload all files from a local directory to a specified R2 bucket path.
     Args:
@@ -177,7 +203,8 @@ def upload_directory_to_r2(local_dir: str, bucket_name: str, r2_prefix: str = ""
     for full_path, r2_key in tqdm(files_to_upload, desc="Uploading to R2"):
         try:
             r2_client.upload_file(full_path, bucket_name, r2_key)
-            print(f"Uploaded {full_path} to r2://{bucket_name}/{r2_key}")
+            if verbose:
+                print(f"Uploaded {full_path} to r2://{bucket_name}/{r2_key}")
         except Exception as e:
             print(f"Failed to upload {full_path} to {r2_key}: {e}")
 
