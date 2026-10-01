@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# updated 09-27-2026
+
 # GitHub CLI is required for this template's automation, so verify it before doing anything else
 if ! command -v gh &> /dev/null; then
     echo "Error: GitHub CLI (gh) is not installed."
