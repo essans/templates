@@ -5,5 +5,10 @@
     "description":"What this is about",
     "python_version":3.12,
     "venv_name":"",
-    "create_gh_repo": ["N", "Y"]
+    "create_gh_repo": ["N", "Y"],
+    "install_dependencies": ["N", "Y"],
+    "__prompts__": {
+        "venv_name": "venv_name in ~/environments/ (leave blank to skip)",
+        "install_dependencies": "pip install -e \".[dev]\" into the venv? (only used if a venv name is given)"
+    }
 }
